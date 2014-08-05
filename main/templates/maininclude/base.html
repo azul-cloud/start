@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}Default Title{% endblock %}
+        </title>
+        {% block stylesheets %}
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+        {% endblock %}
+        {% block javascript %}
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+            <script src="{% static 'js/script.js' %}"></script>
+        {% endblock %}
+        {% block meta_tags %}{% endblock %}
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        {% include "maininclude/header.html" %}
+        <div id="main" role="main">
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
