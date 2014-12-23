@@ -1,7 +1,10 @@
 from django.conf.urls import patterns, include, url
 
-from main import views
+from . import views
+
+
+prefix = "main_"
 
 urlpatterns = patterns('',
-    url(r'^$', views.home, name="home"),
+    url(r'^$', views.HomeTemplateView.as_view(), name=prefix + "home"),
 )

@@ -1,0 +1,1 @@
+Give a description of the applications that are included in the project and their functions.

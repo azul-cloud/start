@@ -1,0 +1,1 @@
+Give an explanation of the architecture of the project.
