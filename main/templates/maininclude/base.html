@@ -15,16 +15,22 @@
             <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
             <script src="{% static 'js/script.js' %}"></script>
         {% endblock %}
-        {% block meta_tags %}{% endblock %}
+        {% block meta_tags %}
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock %}
         {% block extra_head %}{% endblock %}
     </head>
     <body>
-        {% include "maininclude/header.html" %}
-        <div id="main" role="main">
-            <div class="container-fluid">
-                {% block main %}
-                {% endblock %}
-            </div>
-        </div>
+      <div id="wrap">
+        <main role="main">
+          <header>
+            {% include "maininclude/header.html" %}
+          </header>  
+          <div class="container-fluid">
+              {% block main %}{% endblock %}
+          </div>
+        </main>
+      </div>
+      {% include "maininclude/footer.html" %}
     </body>
 </html>

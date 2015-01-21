@@ -2,16 +2,18 @@ from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+from django_webtest import WebTest
+
 from .models import User
+from .factories import NormalUserFactory
 
 
-class MainModelTest(TestCase):
+class MainSetUp(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user(
-            "main_test_user",
-            "email@domain.com",
-            "testpassword",
-        )
+        self.user = NormalUserFactory
+
+
+class MainModelTest(MainSetUp):
 
     def test_model(self):
         # instance = Model.objects.get(name = "Tag 1")
@@ -19,23 +21,16 @@ class MainModelTest(TestCase):
         pass
 
 
-class MainViewTest(TestCase):
+class MainViewTest(MainSetUp, WebTest):
     def setUp(self):
         MainModelTest.setUp(self)
 
-        self.client.login(username=self.user.username, 
-            password='testpassword')
-
     def test_home(self):
         url = reverse('main_home')
-        response = self.client.get(url)
+        response = self.app.get(url, user=self.user)
 
 
-class MainFormTest(TestCase):
-
-    def setUp(self):
-        MainViewTest.setUp(self)
-
+class MainFormTest(MainSetUp, WebTest):
     def test_blog_create_form(self):
         pass
         # url = reverse('blog_create')
@@ -47,7 +42,7 @@ class MainFormTest(TestCase):
         #     "city":self.city
         # }
 
-        # response = self.client.post(url, post)
+        # response = self.app.post(url, post, user=self.user)
 
         # # make sure the response has the newly created post
         # self.assertEqual(response.status_code, 200)
